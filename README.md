@@ -8,40 +8,41 @@ Python program to generate a vector db over a set of documents and enable llm ch
 
 ## Install:
 
-- Configuration:
+### Configuration:
+
 Create a file called ".env" and inside, place you api key just like this
-´´´
+```bash
 OPENAI_API_KEY=your_api_key_goes_here
-´´´bash
+```
 
 Create a virtual Environment:
-´´´
+```bash
 pip3 install virtualenv
 python3 -m venv chatenv
-´´´
+```
 
 Activate it:
-´´´
-// Mac/Linux
+```bash
+# Mac/Linux
 source chatenv/bin/activate
 
-// Windows cmd
+# Windows cmd
 chatenv\Scripts\activate.bat
-´´´bash
+```
 
-- Install dependencies:
-´´´
+### Install dependencies:
+```bash
 python -m pip install --upgrade pip
 pip install -r requirements.txt
-´´´bash
+```
 
 
 ## Usage 
 
 - Execution; Be sure to have the environment active and then run the following command:
-´´´
+```
   python main.py -d path/to/documents/folder
-´´´bash
+```bash
 
 This will check if that folder contains an existing database, otherwise it will process all the documents inside and generate a vector database in that path
 
