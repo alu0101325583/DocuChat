@@ -1,8 +1,7 @@
-"""
-Para ejecutar, escribir en la terminal: python main.py
-Para salir, tan solo debe escribir: exit()
-"""
+
 import re
+import argparse
+from os import system, name
 from time import sleep
 from os import getenv, walk
 from os.path import isfile, join, exists
@@ -34,24 +33,24 @@ def get_loaders(directory):
 
 def load_or_create_vectordb(directory):
     embeddings = OpenAIEmbeddings()
-
-    if exists(directory + "/../vectordb"):
-        print("Loading vector database from " + directory + "/../vectordb")
-        return Chroma(persist_directory=directory + "/../vectordb", embedding_function=embeddings)
-
-    persist_directory = directory + "/../vectordb"
-    print("Creating vector database in " + persist_directory)
+    dbPath = directory + "/vectordb"
+    if exists(dbPath):
+        print("Loading vector database from " + dbPath)
+        return Chroma(persist_directory=dbPath, embedding_function=embeddings)
 
     loaders = get_loaders(directory)
 
-    fil = {"persist_directory": persist_directory,
+    print("Creating vector database in " + dbPath)
+
+    fil = {"persist_directory": dbPath,
            "embedding_function": embeddings}  # ,"chroma_db_impl": "duckdb+parquet"}
+    
     index_creator = VectorstoreIndexCreator(vectorstore_kwargs=fil)
     vector_index = index_creator.from_loaders(loaders)
     return vector_index.vectorstore
 
 
-def process_dir(directory="/Users/juangarciamelian/Desktop/Chatpdf/pythonProject/Documents"):
+def process_dir(directory="./documents"):
 
     _template = """Dada la siguiente conversación y una pregunta de seguimiento, reformula la pregunta de seguimiento para que sea una pregunta independiente. Ten en cuenta que si el historial esta vacio, la pregunta reformulada sera la pregunta inicial.
 
@@ -73,7 +72,7 @@ Pregunta reformulada:"""
     )
 
     chat_history = []
-
+    system("cls" if name == "nt" else "clear")
     print("Hola, preguntame algo sobre tus documentos:\n")
 
     while True:
@@ -94,10 +93,22 @@ Pregunta reformulada:"""
 
 
 if __name__ == '__main__':
+
     load_dotenv()
     if getenv("OPENAI_API_KEY") is None or getenv("OPENAI_API_KEY") == "":
         print("Please, set your OPENAI_API_KEY in a .env file")
         exit()
     print("OpenAI API Key set.")
 
-    process_dir()
+    parser = argparse.ArgumentParser(
+                    prog='ProgramName',
+                    description='What the program does',
+                    epilog='Text at the bottom of help')
+    
+    parser.add_argument('-d', '--directory', help='Directory with documents to process', required=False)
+    args = parser.parse_args()
+
+    if(args.directory is not None):
+        process_dir(args.directory)
+    else:
+        process_dir()

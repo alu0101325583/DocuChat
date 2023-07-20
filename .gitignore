@@ -1,3 +1,10 @@
+# Documents and database
+documents/
+vectordb/
+.DS_Store
+chatenv/
+Notes.md
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
