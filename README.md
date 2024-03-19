@@ -40,9 +40,9 @@ pip install -r requirements.txt
 ## Usage 
 
 - Execution; Be sure to have the environment active and then run the following command:
-```
-  python main.py -d path/to/documents/folder
 ```bash
+  python main.py -d path/to/documents/folder
+```
 
 This will check if that folder contains an existing database, otherwise it will process all the documents inside and generate a vector database in that path
 
