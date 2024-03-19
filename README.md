@@ -1,5 +1,5 @@
 # DocuChat
-Repo of me lesrning sbout langchain and llamaIndex frameworks for Augmented retrieval chatbots over documents
+Repo of me learning sbout langchain and llamaIndex frameworks for Augmented retrieval chatbots over documents
 
 ## Requirements
 - Python >= 3.8 && < 4
