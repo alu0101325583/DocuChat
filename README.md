@@ -1,5 +1,5 @@
 # DocuChat
-Python program to generate a vector db over a set of documents and enable llm chatting about them
+Repo of me lesrning sbout langchain and llamaIndex frameworks for Augmented retrieval chatbots over documents
 
 ## Requirements
 - Python >= 3.8 && < 4
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 - Execution; Be sure to have the environment active and then run the following command:
 ```bash
-  python main.py -d path/to/documents/folder
+  python main.py | askLangChain.py | askLlama.py -d path/to/documents/folder
 ```
 
 This will check if that folder contains an existing database, otherwise it will process all the documents inside and generate a vector database in that path
